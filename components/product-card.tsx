@@ -9,19 +9,19 @@ interface ProductCardProps {
 
 export default function ProductCard({ name, image, description }: ProductCardProps) {
   return (
-    <Card className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
-      <CardContent className="p-0">
-        <div className="relative w-full h-64 bg-gray-100 flex items-center justify-center">
+    <Card className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer h-full">
+      <CardContent className="p-0 h-full flex flex-col">
+        <div className="relative w-full h-80 bg-gray-100 flex items-center justify-center overflow-hidden">
           <Image
             src={image || "/placeholder.svg"}
             alt={name}
-            width={300}
-            height={300}
-            className="object-contain w-full h-full transition-transform duration-300 group-hover:scale-105"
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
             priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           />
         </div>
-        <div className="p-4 text-center bg-white">
+        <div className="p-4 text-center bg-white flex-1 flex items-center justify-center">
           <h3 className="text-xl font-semibold text-gray-800">{name}</h3>
         </div>
         {/* Description Overlay */}

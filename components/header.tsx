@@ -1,10 +1,10 @@
-'use client'
+"use client"
 
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from 'lucide-react'
+import { Menu } from "lucide-react"
 
 export default function Header() {
   return (
@@ -14,16 +14,32 @@ export default function Header() {
         <span className="sr-only">Pavandev Masala</span>
       </Link>
       <nav className="hidden md:flex items-center gap-6">
-        <Link href="/" className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors" prefetch={false}>
+        <Link
+          href="/"
+          className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors"
+          prefetch={false}
+        >
           Home
         </Link>
-        <Link href="#products" className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors" prefetch={false}>
+        <Link
+          href="#products"
+          className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors"
+          prefetch={false}
+        >
           Products
         </Link>
-        <Link href="#about-us" className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors" prefetch={false}>
+        <Link
+          href="#about-us"
+          className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors"
+          prefetch={false}
+        >
           About Us
         </Link>
-        <Link href="#contact" className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors" prefetch={false}>
+        <Link
+          href="#contact"
+          className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors"
+          prefetch={false}
+        >
           Contact
         </Link>
       </nav>
@@ -36,16 +52,32 @@ export default function Header() {
         </SheetTrigger>
         <SheetContent side="right" className="w-[250px] sm:w-[300px]">
           <div className="flex flex-col gap-6 pt-8">
-            <Link href="/" className="text-lg font-medium text-gray-700 hover:text-red-600 transition-colors" prefetch={false}>
+            <Link
+              href="/"
+              className="text-lg font-medium text-gray-700 hover:text-red-600 transition-colors"
+              prefetch={false}
+            >
               Home
             </Link>
-            <Link href="#products" className="text-lg font-medium text-gray-700 hover:text-red-600 transition-colors" prefetch={false}>
+            <Link
+              href="#products"
+              className="text-lg font-medium text-gray-700 hover:text-red-600 transition-colors"
+              prefetch={false}
+            >
               Products
             </Link>
-            <Link href="#about-us" className="text-lg font-medium text-gray-700 hover:text-red-600 transition-colors" prefetch={false}>
+            <Link
+              href="#about-us"
+              className="text-lg font-medium text-gray-700 hover:text-red-600 transition-colors"
+              prefetch={false}
+            >
               About Us
             </Link>
-            <Link href="#contact" className="text-lg font-medium text-gray-700 hover:text-red-600 transition-colors" prefetch={false}>
+            <Link
+              href="#contact"
+              className="text-lg font-medium text-gray-700 hover:text-red-600 transition-colors"
+              prefetch={false}
+            >
               Contact
             </Link>
           </div>
