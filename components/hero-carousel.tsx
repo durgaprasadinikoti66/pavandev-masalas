@@ -4,8 +4,9 @@ import { useCallback, useEffect, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Instagram, Play } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 interface SlideContent {
   title: string
@@ -13,8 +14,7 @@ interface SlideContent {
   description: string
   buttonText?: string
   buttonLink?: string
-  type?: "video" | "instagram"
-  instagramUrl?: string
+  backgroundImage?: string
 }
 
 const slides: SlideContent[] = [
@@ -25,41 +25,39 @@ const slides: SlideContent[] = [
       "Hand-ground with passion and tradition, our premium spices bring unparalleled flavor to every dish. Explore our exquisite range and elevate your culinary journey.",
     buttonText: "Explore Products",
     buttonLink: "#products",
-    type: "video",
+    backgroundImage: "/images/spices-hero-1.jpg",
   },
   {
-    title: "Watch Our Latest Recipe",
-    subtitle: "Delicious Cooking with Pavandev Masalas",
+    title: "Bringing Authentic Flavours",
+    subtitle: "To Every Kitchen",
     description:
-      "See how our premium masalas transform ordinary ingredients into extraordinary dishes. Follow us on Instagram for more amazing recipes and cooking tips!",
-    buttonText: "Watch on Instagram",
-    buttonLink: "https://www.instagram.com/reel/DM92ZX5xIAT/?utm_source=ig_web_copy_link",
-    type: "instagram",
-    instagramUrl: "https://www.instagram.com/reel/DM92ZX5xIAT/?utm_source=ig_web_copy_link",
+      "Our masalas are crafted with the finest ingredients, ensuring that every meal you prepare is filled with the authentic taste of India. Taste the difference quality makes.",
+    buttonText: "View Products",
+    buttonLink: "#products",
+    backgroundImage: "/images/spices-hero-2.jpg",
   },
   {
-    title: "Crafted with Purity & Passion",
-    subtitle: "The Secret to Exquisite Indian Cuisine",
+    title: "Pure & Natural Spices",
+    subtitle: "From Our Kitchen to Yours",
     description:
-      "At Pavandev, we believe in preserving the true essence of spices. Our masalas are made from the finest ingredients, ensuring unmatched quality and taste in every pack.",
-    buttonText: "Learn More",
+      "Experience the rich aroma and vibrant colors of our carefully selected spices. Each blend tells a story of tradition, quality, and authentic Indian flavors.",
+    buttonText: "Discover Quality",
     buttonLink: "#about-us",
-    type: "video",
+    backgroundImage: "/images/spices-hero-3.jpg",
   },
   {
-    title: "Behind the Scenes",
-    subtitle: "See How We Make Our Masalas",
+    title: "Flavour of the Gods",
+    subtitle: "Spice for Your Soul",
     description:
-      "Get an exclusive look at our spice grinding process and quality control. Discover the passion and precision that goes into every packet of Pavandev Masala.",
-    buttonText: "Watch Process",
-    buttonLink: "https://www.instagram.com/reel/DM44Y6CR1tD/?utm_source=ig_web_copy_link",
-    type: "instagram",
-    instagramUrl: "https://www.instagram.com/reel/DM44Y6CR1tD/?utm_source=ig_web_copy_link",
+      "Discover our comprehensive collection of premium spices and masalas. From whole spices to ground powders, we bring you the essence of traditional Indian cooking.",
+    buttonText: "Shop Now",
+    buttonLink: "#products",
+    backgroundImage: "/images/spices-hero-4.jpg",
   },
 ]
 
 export default function HeroCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 10000, stopOnInteraction: false })])
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 8000, stopOnInteraction: false })])
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
 
@@ -105,51 +103,30 @@ export default function HeroCarousel() {
         <div className="embla__container h-full flex">
           {slides.map((slide, index) => (
             <div key={index} className="embla__slide relative flex-shrink-0 flex-grow-0 basis-full h-full">
-              {slide.type === "video" ? (
-                <video
-                  className="absolute inset-0 w-full h-full object-cover"
-                  src="/videos/spices-video.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                  aria-label="Background video of spices and cooking"
-                />
-              ) : (
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-orange-600 via-red-600 to-pink-600">
-                  {/* Instagram-style background pattern */}
-                  <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                      backgroundImage: `radial-gradient(circle at 25% 25%, white 2px, transparent 2px), radial-gradient(circle at 75% 75%, white 2px, transparent 2px)`,
-                      backgroundSize: "50px 50px",
-                    }}
-                  ></div>
-                  {/* Instagram play button overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-8 border-2 border-white/30">
-                      <Play className="h-16 w-16 text-white fill-white" />
-                    </div>
-                  </div>
-                </div>
-              )}
+              <Image
+                src={slide.backgroundImage || "/placeholder.svg"}
+                alt={`${slide.title} - Pavandev Masalas`}
+                fill
+                className="object-cover"
+                priority={index === 0}
+                sizes="100vw"
+              />
 
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-800/60 to-amber-600/60 flex flex-col items-center justify-center text-white text-center p-4 md:p-8 lg:p-12">
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70 flex flex-col items-center justify-center text-white text-center p-4 md:p-8 lg:p-12">
                 <h1
-                  className="text-4xl md:text-6xl font-extrabold mb-4 animate-fade-in animate-slide-up"
+                  className="text-4xl md:text-6xl font-extrabold mb-4 animate-fade-in animate-slide-up drop-shadow-lg"
                   style={{ animationDelay: "0.5s" }}
                 >
                   {slide.title}
                 </h1>
                 <h2
-                  className="text-2xl md:text-4xl font-bold mb-6 animate-fade-in animate-slide-up"
+                  className="text-2xl md:text-4xl font-bold mb-6 animate-fade-in animate-slide-up drop-shadow-lg"
                   style={{ animationDelay: "0.7s" }}
                 >
                   {slide.subtitle}
                 </h2>
                 <p
-                  className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-8 animate-fade-in animate-slide-up"
+                  className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-8 animate-fade-in animate-slide-up drop-shadow-lg"
                   style={{ animationDelay: "0.9s" }}
                 >
                   {slide.description}
@@ -157,22 +134,10 @@ export default function HeroCarousel() {
                 {slide.buttonText && slide.buttonLink && (
                   <Button
                     asChild
-                    className={`text-lg px-8 py-3 rounded-full shadow-lg animate-fade-in animate-slide-up ${
-                      slide.type === "instagram"
-                        ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0"
-                        : "bg-white text-emerald-900 hover:bg-gray-100"
-                    }`}
+                    className="bg-red-600 hover:bg-red-700 text-white text-lg px-8 py-3 rounded-full shadow-lg animate-fade-in animate-slide-up border-0"
                     style={{ animationDelay: "1.1s" }}
                   >
-                    <Link
-                      href={slide.buttonLink}
-                      target={slide.type === "instagram" ? "_blank" : undefined}
-                      rel={slide.type === "instagram" ? "noopener noreferrer" : undefined}
-                      className="flex items-center gap-2"
-                    >
-                      {slide.type === "instagram" && <Instagram className="h-5 w-5" />}
-                      {slide.buttonText}
-                    </Link>
+                    <Link href={slide.buttonLink}>{slide.buttonText}</Link>
                   </Button>
                 )}
               </div>
